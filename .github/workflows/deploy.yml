@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: 构建
+    name: 构建 Docusaurus
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -48,6 +48,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
       - name: 部署到 GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
