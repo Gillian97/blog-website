@@ -6,17 +6,18 @@ sidebar_position: 2
 
 ## 定义
 
-MDN
+### [MDN](https://developer.mozilla.org/en-US/docs/Glossary/HTML5)
 
 术语 HTML5 本质上是指一组现代 Web 技术的流行词汇。这包括 HTML 动态标准，以及用于增强存储、多媒体和硬件访问的 JavaScript API。
 
-你有时会听到“新的 HTML5 元素”，或发现 HTML5 被描述为 HTML 的新版本。HTML5 是以前版本 HTML 的继任者，引入了新的元素和功能，改进或删除了一些现有功能。然而，作为动态标准，HTML 现在没有版本。最新的规范可以在 html.spec.whatwg.org/ 找到。
+你有时会听到“新的 HTML5 元素”，或发现 HTML5 被描述为 HTML 的新版本。HTML5 是以前版本 HTML 的继任者，引入了新的元素和功能，改进或删除了一些现有功能。然而，作为动态标准，HTML 现在没有版本。最新的规范可以在
+[html.spec.whatwg.org](https://html.spec.whatwg.org/) 找到。
 
-任何现代网站都应该使用 HTML 文档类型(doctype)——这将确保你使用的是最新版本的 HTML。
+任何现代网站都应该使用 HTML 文档类型(DOCTYPE)——这将确保你使用的是最新版本的 HTML。
 
 通俗理解: 随着 HTML 标准迭代, html5 是一个较大变化的标准, 增加了较多的规范和特性, 使得 html 的使用与编写更加规范
 
-[维基百科](https://zh.wikipedia.org/wiki/HTML5)
+### [维基百科](https://zh.wikipedia.org/wiki/HTML5)
 
 HTML5 是 HTML 最新的修订版本，由万维网联盟（W3C）于 2014 年 10 月完成标准制定。目标是取代 1999 年所制定的 HTML 4.01 和 XHTML 1.0 标准，以期能在互联网应用迅速发展的时候，使网络标准达到符合当代的网络需求。
 
