@@ -23,17 +23,26 @@ HTML5 是 HTML 最新的修订版本，由万维网联盟（W3C）于 2014 年 1
 
 **广义论及 HTML5 时，实际指的是包括 HTML、CSS 和 JavaScript 在内的一套技术组合**。它希望能够减少网页浏览器对于需要插件的丰富性网络应用服务（Plug-in-Based Rich Internet Application，RIA），例如：Adobe Flash、Microsoft Silverlight 与 Oracle JavaFX 的需求，并且提供更多能有效加强网络应用的标准集。
 
-下述均为 HTML5 新特性。
+**下述均为 HTML5 新特性。**
+
+> 用横线框住的区域，表示总结&记忆部分；非框区域，表示官网说明内容，便于理解设计思路及原理等
 
 ## HTML 语义化
 
 ### 理解语义化
 
+---
+
 使用正确的 HTML 元素来做正确的工作。
+
+- 利于开发：使代码**结构清晰，可读性高，方便维护**
+- 利于 SEO：方便爬虫根据语义标签确定**页面结构**和**关键字**的权重
+
+---
 
 HTML 应该编写为表示将要填充的数据，而不是基于其默认的演示样式。演示（应该是什么样子），是 CSS 的唯一责任。
 
-写语义标记的一些好处如下：
+写语义标记的好处如下：
 
 - 搜索引擎将其内容视为影响页面搜索排名的重要关键字（参见 [SEO](https://developer.mozilla.org/zh-CN/docs/Glossary/SEO)）。
 - 屏幕阅读器可以将其用作指引，帮助视力受损的用户导航页面。
@@ -43,6 +52,16 @@ HTML 应该编写为表示将要填充的数据，而不是基于其默认的演
 - 默认情况下，绝大多数浏览器的用户代理样式表会赋予语义化标签对应的样式
 
 ### 语义化标签
+
+---
+
+你在平常工作中使用过哪些语义标签？
+
+header, nav, aside, main, section, article, footer, canvas, video, audio
+
+[语义化标签 demo](pathname:///html)
+
+---
 
 这里是大约 100 个语义化[元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element)中的一些：
 
