@@ -1,4 +1,4 @@
-import TagDemo from "./tag";
+import TagDemo from "./common-tag";
 
 export default function HtmlDemo() {
   return (
