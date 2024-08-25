@@ -5,7 +5,8 @@ import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Heading from "@theme/Heading";
 
-import styles from "./index.module.css";
+import styles from "./index.module.scss";
+import "@arco-design/web-react/dist/css/arco.css";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
