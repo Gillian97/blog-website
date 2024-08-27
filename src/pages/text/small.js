@@ -1,0 +1,1 @@
+alert("Small script loaded");
