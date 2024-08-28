@@ -1,9 +1,12 @@
 ---
 sidebar_position: 1
+# 显示 h2 到 h5 标题
+toc_min_heading_level: 2
+toc_max_heading_level: 4
 ---
 
 import { SelfUnderstanding, InterviewQuestion } from '@site/src/components/MDX';
-import TagTable from '@site/src/components/html/tag-table';
+import ShowTable from '@site/src/components/html/show-table';
 import CodeLive from '@site/src/components/CodeLive';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -18,13 +21,12 @@ IE5.5 发明了**文档模式**的概念，即可以使用 DOCTYPE 切换文档�
 
 随着浏览器的普遍实现，又出现了第三种文档模式：**准标准模式（almost standards mode）**。这种模式下的浏览器支持很多标准的特性，但是没有标准规定得那么严格。主要区别在于如何对待图片元素周围的空白（在表格中使用图片时最明显）。
 
-### 开启声明
 
-#### 混杂模式/怪异模式
+### 混杂模式/怪异模式
 
 混杂模式在所有浏览器中都以**省略文档开头的 DOCTYPE** 声明作为开关。这种约定并不合理，因为混杂模式在不同浏览器中的差异非常大，不使用黑科技基本上就没有浏览器一致性可言。
 
-#### 标准模式
+### 标准模式
 
 标准模式通过下列几种文档类型声明开启：
 
@@ -39,7 +41,7 @@ IE5.5 发明了**文档模式**的概念，即可以使用 DOCTYPE 切换文档�
 <!DOCTYPE html>
 ```
 
-#### 准标准模式
+### 准标准模式
 
 准标准模式通过**过渡性**文档类型（Transitional）和**框架集**文档类型（Frameset）来触发：
 
@@ -97,17 +99,17 @@ W3C（万维网联盟）制定了一套 web 标准来处理这种情况。所有
 
 ## async/defer
 
-\<script\>
+**\<script\>**
 
 HTML 解析中断，脚本被提取并立即执行。执行结束后，HTML 解析继续。
 
-\<script async\>
+**\<script async\>**
 
 脚本的提取、执行的过程与 HTML 解析过程并行，脚本执行完毕可能在 HTML 解析完毕之前。
 
 当脚本与页面上其他脚本独立时，可以使用 async，比如用作页面统计分析。
 
-\<script defer\>
+**\<script defer\>**
 
 脚本仅提取过程与 HTML 解析过程并行，脚本的执行将在 HTML 解析完毕后但在 DOMContentLoaded 事件之前进行。
 
@@ -118,19 +120,6 @@ HTML 解析中断，脚本被提取并立即执行。执行结束后，HTML 解�
 可参考 [script-async-defer](https://zh.javascript.info/script-async-defer)
 
 ![picture 3](.assets_images/basic/IMG_20240817-164242389.png)
-
-<pre>
-  <b>Input: </b>1 2 3 4{'\n'}
-  <b>Output: </b>"366300745"{'\n'}
-</pre>
-<CodeLive code={`
-<div>
-<p>...content before script...</p>
-
-<script src="https://javascript.info/article/script-async-defer/long.js?speed=1"></script>
-<p>...content after script...</p>
-</div>
-`} />
 
 <Tabs>
 <TabItem value='defer' label='defer'>
@@ -231,19 +220,31 @@ function Demo() {
 - 会阻塞主页面的 onload 事件
 - 和主页面共享连接池,影响页面并行加载
 
-## cookie/sessionStorage(HTML5)/localStorage(HTML5)
+## 客户端存储
 
-| 特点\存储类型                                       | cookie                                             | localStorage | sessionStorage | IndexedDB |
-| --------------------------------------------------- | -------------------------------------------------- | ------------ | -------------- | --------- |
-| 在当前浏览器会话（browser sessions） 中是否保持不变 | 取决于是否设置了过期时间                           | 是           | 否             | 是        |
-| 由谁初始化                                          | 客户端或服务器，服务器可以使用 Set-Cookie 请求头。 | 客户端       | 客户端         | 客户端    |
-| 是否随着每个 HTTP 请求发送给服务器                  | 是，Cookies 会通过 Cookie 请求头，自动发送给服务器 | 否           | 否             | 否        |
-| 容量（每个域名）                                    | 4kb                                                | 5MB          | 5MB            | 5M        |
-| 过期时间                                            | 手动设置                                           | 永不过期     | 当前页面关闭时 | 永不过期  |
-| 访问权限                                            | 任意窗口                                           | 任意窗口     | 当前页面窗口   | 任意窗口  |
-| 存储内容（不要存储敏感信息）                        | 字符串                                             | 字符串       | 字符串         | 对象      |
+更多详情 [客户端存储](https://web.dev/articles/storage-for-the-web?hl=zh-cn#other)
 
-## 对于 Web 标准以及 W3C 的理解
+<Collapse defaultActiveKey={['cookie', "web_storage", "IndexedDB"]}>
+<Collapse.Item header="cookie" name="cookie">
+
+随着Web应用程序的出现，直接在客户端存储用户信息的需求也随之出现。这背后的想法是合理的：**与特定用户相关的信息应该保存在用户的机器上**。无论是登录信息、个人偏好，还是其他数据，
+Web应用程序提供者都需要有办法把它们保存在客户端。对该问题的第一个解决方案就是cookie，cookie由古老的网景公司发明，由一份名为 Persistent Client State: HTTP Cookies 的规范定义。今天，cookie只是在客户端存储数据的一个选项。
+
+</Collapse.Item>
+<Collapse.Item header="web storage" name="web_storage">
+Web Storage最早是网页超文本应用技术工作组（WHATWG，Web Hypertext Application Technical Working Group）在Web Applications 1.0规范中提出的。这个规范中的草案最终成为了HTML5的一部分，后来又独立成为自己的规范。
+**Web Storage的目的是解决通过客户端存储不需要频繁发送回服务器的数据时使用cookie的问题。**
+</Collapse.Item>
+<Collapse.Item header="IndexedDB" name="IndexedDB">
+IndexedDB背后的思想是创造一套API，方便JavaScript对象的存储和获取，同时也支持查询和搜索。
+IndexedDB的设计几乎完全是异步的。
+</Collapse.Item>
+</Collapse>
+
+
+<ShowTable type='storage' style={{ marginTop: 12 }} />
+
+## W3C 理解
 
 Web 标准简单来说可以分为结构、表现、行为。
 
@@ -401,7 +402,7 @@ HTML 应该编写为表示将要填充的数据，而不是基于其默认的演
 
 header, nav, aside, main, section, article, footer, canvas, video, audio
 
-<TagTable />
+<ShowTable type='tag' />
 
 <Tabs>
 <TabItem value="main" label="main">
@@ -532,13 +533,11 @@ canvas 元素创造了一个固定大小的画布，它公开了一个或多个�
 
 canvas 起初是空白的。为了展示，首先脚本需要找到渲染上下文，然后在它的上面绘制。
 
-canvas 元素有一个叫做 getContext() 的方法，这个方法是用来获得渲染上下文和它的绘画功能。getContext()接受一个参数，即上下文的类型。
+canvas 元素有一个叫做 `getContext()` 的方法，这个方法是用来获得渲染上下文和它的绘画功能。`getContext()` 接受一个参数，即上下文的类型。
 
-##### 画布栅格 canvas grid
+##### 画布栅格
 
-画布栅格（canvas grid）以及坐标空间。上一页中的 HTML 模板中有个宽 150px, 高 150px 的 canvas 元素。
-
-如右图所示，canvas 元素默认被网格所覆盖。通常来说网格中的一个单元相当于 canvas 元素中的一像素。
+画布栅格（canvas grid）以及坐标空间。如图所示，canvas 元素默认被网格所覆盖。通常来说网格中的一个单元相当于 canvas 元素中的一像素。
 栅格的起点为左上角（坐标为（0,0））。所有元素的位置都相对于原点定位。所以图中蓝色方形左上角的坐标为距离左边（X 轴）x 像素，距离上边（Y 轴）y 像素（坐标为**(x,y)**）。
 在课程的最后我们会平移原点到不同的坐标上，旋转网格以及缩放。现在我们还是使用原来的设置。
 
@@ -552,21 +551,21 @@ canvas 元素有一个叫做 getContext() 的方法，这个方法是用来获�
 ```js
 fillRect(x, y, width, height)
 ```
-绘制一个填充的矩形
+1. 绘制一个填充的矩形
 ```js
 strokeRect(x, y, width, height)
 ```
-绘制一个矩形的边框
+2. 绘制一个矩形的边框
 ```js
 clearRect(x, y, width, height)
 ```
-清除指定矩形区域，让清除部分完全透明。
+3. 清除指定矩形区域，让清除部分完全透明。
 
 上面提供的方法之中每一个都包含了相同的参数。x 与 y 指定了在 canvas 画布上所绘制的矩形的左上角（相对于原点）的坐标。width 和 height 设置矩形的尺寸。
 
 ##### 绘制路径
 
-图形的基本元素是路径。路径是通过不同颜色和宽度的线段或曲线相连形成的不同形状的点的集合。一个路径，甚至一个子路径，都是闭合的。使用路径绘制图形需要一些额外的步骤。
+图形的基本元素是路径。路径是通过**不同颜色和宽度的线段或曲线相连**形成的不同形状的点的集合。一个路径，甚至一个子路径，都是闭合的。使用路径绘制图形需要一些额外的步骤。
 
 首先，你需要创建路径起始点。
 然后你使用画图命令去画出路径。
@@ -574,38 +573,37 @@ clearRect(x, y, width, height)
 一旦路径生成，你就能通过描边或填充路径区域来渲染图形。
 以下是所要用到的函数：
 
-beginPath()
-新建一条路径，生成之后，图形绘制命令被指向到路径上生成路径。
+`beginPath()`新建一条路径，生成之后，图形绘制命令被指向到路径上生成路径。
 
-closePath()
-闭合路径之后图形绘制命令又重新指向到上下文中。
+`closePath()`闭合路径之后图形绘制命令又重新指向到上下文中。
 
-stroke()
-通过线条来绘制图形轮廓。
+`stroke()`通过线条来绘制图形轮廓。
 
-fill()
-通过填充路径的内容区域生成实心的图形。
+`fill()`通过填充路径的内容区域生成实心的图形。
 
 **生成路径的步骤:**
 
-1. beginPath()。本质上，路径是由很多子路径构成，这些子路径都是在一个列表中，所有的子路径（线、弧形、等等）构成图形。而每次这个方法调用之后，列表清空重置，然后我们就可以重新绘制新的图形。
+beginPath() → moveTo(x, y) → lineTo(x, y) → ... → stroke() 或者 fill()
+
+1. `beginPath()`。本质上，路径是由很多子路径构成，这些子路径都是在一个列表中，所有的子路径（线、弧形、等等）构成图形。而每次这个方法调用之后，列表清空重置，然后我们就可以重新绘制新的图形。
 > 备注：当前路径为空，即调用 beginPath() 之后，或者 canvas 刚建的时候，第一条路径构造命令通常被视为是 moveTo()，无论实际上是什么。出于这个原因，你几乎总是要在设置路径之后专门**指定你的起始位置**。
 2. 调用函数指定绘制路径
 
-3. 闭合路径 closePath(), 不是必需的。这个方法会通过绘制一条从当前点到开始点的直线来闭合图形。如果图形是已经闭合了的，即当前点为开始点，该函数什么也不做。
+3. 闭合路径 `closePath()`, 不是必需的。这个方法会通过绘制一条从当前点到开始点的直线来闭合图形。如果图形是已经闭合了的，即当前点为开始点，该函数什么也不做。
 > 备注：当你调用 fill() 函数时，所有没有闭合的形状都会自动闭合，所以你不需要调用 closePath() 函数, 但是**调用 stroke() 时不会自动闭合**。
+
 
 ##### 移动笔触
 
-moveTo(x, y)
-将笔触移动到指定的坐标 x 以及 y 上。当 canvas 初始化或者beginPath()调用后，你通常会使用moveTo()函数设置起点。
+`moveTo(x, y)`
+将笔触移动到指定的坐标 x 以及 y 上。当 canvas 初始化或者`beginPath()`调用后，你通常会使用`moveTo()`函数设置起点。
 
 ##### 绘制直线
 
-lineTo(x, y)
+`lineTo(x, y)`
 绘制一条从当前位置到指定 x 以及 y 位置的直线。
 
-该方法有两个参数：x 以及 y，代表坐标系中直线结束的点。开始点和之前的绘制路径有关，之前路径的结束点就是接下来的开始点，以此类推。开始点也可以通过moveTo()函数改变。
+该方法有两个参数：x 以及 y，代表坐标系中直线结束的点。开始点和之前的绘制路径有关，之前路径的结束点就是接下来的开始点，以此类推。开始点也可以通过`moveTo()`函数改变。
 
 <Tabs>
 
@@ -740,6 +738,76 @@ function MediaTag(props) {
 </TabItem>
 
 </Tabs>
+
+#### video
+> 更多属性详见 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video)
+
+`src`
+要嵌到页面的视频的 URL。可选；你也可以使用 video 块内的 \<source> 元素来指定需要嵌到页面的视频。
+
+
+`autoplay`
+一个布尔属性；声明该属性后，视频会尽快自动开始播放，不会停下来等待数据全部加载完成。
+
+`controls`
+如果存在该属性，浏览器会在视频底部提供一个控制面板，允许用户控制视频的播放，包括音量、拖动进度、暂停或恢复播放。
+
+`loop` 循环播放
+
+`muted`
+一个布尔属性，指明在视频中音频的默认设置。设置后，音频会初始化为静音。默认值是 false, 意味着视频播放的时候音频也会播放。
+
+```jsx live
+
+function VideoDemo() {
+  const videoUrl =
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+
+  return (
+    <>
+      <video controls width="300" src={videoUrl} autoplay="true" muted></video>
+      <video controls width="200" loop autoplay="true" muted>
+        {/* 在不支持 video 元素的浏览器中，<video></video> 标签中间的内容会显示，作为降级处理。 */}
+        <source src={videoUrl} type="video/webm" />
+        Download the
+        <a href={videoUrl}>WEBM</a>
+      </video>
+    </>
+  );
+}
+```
+#### audio
+> 更多属性详见 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/audio)
+
+`src`
+嵌入的音频的 URL。该 URL 应遵从 HTTP access controls. 这是一个**可选**属性；你可以在 audio 元素中使用 \<source> 元素来替代该属性指定嵌入的音频。
+
+`loop`
+布尔属性；如果声明该属性，将循环播放音频。
+
+`muted`
+表示是否静音的布尔值。默认值为 false，表示有声音。
+
+`controls`
+如果声明了该属性，浏览器将提供一个包含声音，播放进度，播放暂停的控制面板，让用户可以控制音频的播放。
+
+```jsx live
+function AudioDemo() {
+  const audioUrl = "https://github.com/rafaelreis-hotmart/Audio-Sample-files/raw/master/sample.mp3";
+
+  return (
+    <figure>
+      <figcaption>Listen to the T-Rex:</figcaption>
+      {/* 在浏览器不支持该元素时，会显示 <audio></audio> 标签之间的内容作为回退。 */}
+      <audio controls src={audioUrl}>
+        当前不支持 audio 元素
+      </audio>
+      <a href={audioUrl}> Download audio </a>
+    </figure>
+  );
+}
+```
+
 
 
 ## 增强表单

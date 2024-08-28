@@ -1,7 +1,8 @@
 import { Table, type TableColumnProps } from "@arco-design/web-react";
 import { useEffect, useState } from "react";
+import CodeBlock from "@theme/CodeBlock";
 
-const columns: TableColumnProps[] = [
+const TAG_COLUMNS: TableColumnProps[] = [
   {
     title: "标签名",
     dataIndex: "name",
@@ -13,7 +14,7 @@ const columns: TableColumnProps[] = [
   },
 ];
 
-const data = [
+const TAG_DATA = [
   {
     name: "<header>",
     meaning: (
@@ -102,15 +103,123 @@ const data = [
   },
 ];
 
-const TagTable = () => {
+const STORAGE_COLUMNS: TableColumnProps[] = [
+  {
+    title: "特点\\存储类型",
+    dataIndex: "feat",
+    width: 120,
+  },
+  {
+    title: "HTTP cookie",
+    dataIndex: "cookie",
+  },
+  {
+    title: "localStorage",
+    dataIndex: "localStorage",
+  },
+  {
+    title: "sessionStorage",
+    dataIndex: "sessionStorage",
+    width: 160,
+  },
+  {
+    title: "indexedDB",
+    dataIndex: "indexedDB",
+    width: 160,
+  },
+];
+
+const STORAGE_DATA = [
+  {
+    feat: "设置方式",
+    cookie: (
+      <>
+        <CodeBlock language="http" title="HTTP Response Set-Cookie" showLineNumbers>
+          {`HTTP/1.1 200 OK
+Content-type: text/html
+Set-Cookie: name=value
+Other-header: other-header-value`}
+        </CodeBlock>
+      </>
+    ),
+    localStorage: <>客户端设置 getItem()、removeItem()和setItem()方法</>,
+    sessionStorage: <>客户端设置 getItem()、removeItem()和setItem()方法</>,
+    indexedDB: (
+      <>
+        <p>客户端设置</p>
+        <CodeBlock language="js" title="indexedDB" showLineNumbers>
+          {`var request = window.indexedDB.open('dbName', 1); // 打开数据库`}
+        </CodeBlock>
+      </>
+    ),
+  },
+  {
+    feat: "容量",
+    cookie: (
+      <>
+        4KB(单个cookie)
+        <div>每个域能设置的cookie总数也是受限的，但不同浏览器的限制不同, 超出数量限制会被删除</div>
+      </>
+    ),
+    localStorage: "每个源 5MB",
+    sessionStorage: "每个源 5MB",
+    indexedDB: "无限",
+  },
+  {
+    feat: "存储机制",
+    cookie: "取决于是否设置了过期时间",
+    localStorage: "永久存储机制, 直至手动删除或者清除浏览器缓存",
+    sessionStorage: "跨会话存储机制, 只存储会话数据, 数据只会存储到浏览器关闭",
+    indexedDB: "永久存储机制",
+  },
+  {
+    feat: "写入方式",
+    cookie: "HTTP Response Set-Cookie",
+    localStorage: "同步阻塞方式, 数据会被立即提交到存储, 可以立即被读取",
+    sessionStorage: "同步阻塞方式, 数据会被立即提交到存储, 可以立即被读取",
+    indexedDB: "异步写入, 使用时需要指定相关回调",
+  },
+  {
+    feat: "同源策略",
+    cookie: "同源",
+    localStorage: "同源(子域不行)",
+    sessionStorage: "同源",
+    indexedDB: "同源",
+  },
+  {
+    feat: "存储内容（不要存储敏感信息）",
+    cookie: "字符串",
+    localStorage: "字符串",
+    sessionStorage: "字符串",
+    indexedDB: "对象",
+  },
+];
+
+const DATA_SET = {
+  tag: {
+    columns: TAG_COLUMNS,
+    data: TAG_DATA,
+  },
+  storage: {
+    columns: STORAGE_COLUMNS,
+    data: STORAGE_DATA,
+  },
+};
+
+const ShowTable = ({ type, style }) => {
   return (
     <>
-      <Demo />
-      <Table border={false} columns={columns} data={data} pagination={false} />
+      <Table
+        border={false}
+        columns={DATA_SET[type].columns}
+        data={DATA_SET[type].data}
+        pagination={false}
+        style={style ?? {}}
+      />
     </>
   );
 };
-export default TagTable;
+export default ShowTable;
 
 function Demo() {
   const [count, setCount] = useState(0);
@@ -132,5 +241,21 @@ function Demo() {
       {/* 立即可见 */}
       <p>...content after script...</p>
     </>
+  );
+}
+
+// import VideoUrl from '@site/static/media/flower.webm';
+function AudioDemo() {
+  const audioUrl = "https://github.com/rafaelreis-hotmart/Audio-Sample-files/raw/master/sample.mp3";
+
+  return (
+    <figure>
+      <figcaption>Listen to the T-Rex:</figcaption>
+      {/* 在浏览器不支持该元素时，会显示 <audio></audio> 标签之间的内容作为回退。 */}
+      <audio controls src={audioUrl}>
+        当前不支持 audio 元素
+      </audio>
+      <a href={audioUrl}> Download audio </a>
+    </figure>
   );
 }
