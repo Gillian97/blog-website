@@ -193,6 +193,56 @@ Other-header: other-header-value`}
     sessionStorage: "字符串",
     indexedDB: "对象",
   },
+  {
+    feat: "是否会被发送到服务器",
+    cookie: "会",
+    localStorage: "不会",
+    sessionStorage: "不会",
+    indexedDB: "不会",
+  },
+];
+
+const VIEWPORT_COLUMNS: TableColumnProps[] = [
+  { title: "属性", dataIndex: "feat" },
+  { title: "含义", dataIndex: "meaning" },
+  { title: "视口类型", dataIndex: "type" },
+];
+
+const VIEWPORT_DATA = [
+  {
+    feat: "window.innerWidth",
+    meaning: <>浏览器窗口的视口宽度(px)，包括垂直滚动条。</>,
+    type: "布局视口",
+  },
+  {
+    feat: "window.innerHeight",
+    meaning: <>浏览器窗口的视口高度(px)，包括水平滚动条。</>,
+    type: "布局视口",
+  },
+  {
+    feat: "window.outerWidth",
+    meaning: <>浏览器窗口的宽度(px), 浏览器无左右边框</>,
+    type: "浏览器外边框宽度",
+  },
+  {
+    feat: "window.outerHeight",
+    meaning: <>浏览器窗口的高度(px), 包括标签栏/地址栏/书签栏等</>,
+    type: "浏览器外边框高度",
+  },
+  {
+    feat: "document.documentElement.clientWidth",
+    meaning: (
+      <>
+        <b>视口宽度</b>(px)，包括 padding, 不包括 margin/border/垂直滚动条
+      </>
+    ),
+    type: "视觉视口",
+  },
+  {
+    feat: "document.documentElement.clientHeight",
+    meaning: <>视口高度(px)，包括 padding, 不包括 margin/border/水平滚动条</>,
+    type: "视觉视口",
+  },
 ];
 
 const DATA_SET = {
@@ -204,6 +254,10 @@ const DATA_SET = {
     columns: STORAGE_COLUMNS,
     data: STORAGE_DATA,
   },
+  viewport: {
+    columns: VIEWPORT_COLUMNS,
+    data: VIEWPORT_DATA,
+  },
 };
 
 const ShowTable = ({ type, style }) => {
@@ -214,7 +268,7 @@ const ShowTable = ({ type, style }) => {
         columns={DATA_SET[type].columns}
         data={DATA_SET[type].data}
         pagination={false}
-        style={style ?? {}}
+        style={style ?? { margin: "12px 0px" }}
       />
     </>
   );
