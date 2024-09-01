@@ -26,7 +26,7 @@ function Viewport(props: IViewportProps) {
 
   return (
     <div className={styles.wrapper}>
-      <section>
+      <section style={{ width: 1200 }}>
         <h4>大小关系</h4>
         <p>
           <span>浏览器没有左右边框: window.innerWidth</span>
@@ -50,12 +50,15 @@ function Viewport(props: IViewportProps) {
           <span>window.innerHeight</span>
         </p>
       </section>
-      <h4>布局视口</h4>
-      <p>window.innerWidth: {window.innerWidth}</p>
-      <p>window.innerHeight: {window.innerHeight}</p>
       <h4>浏览器外边框长宽</h4>
       <p>window.outerWidth: {window.outerWidth}</p>
       <p>window.outerHeight: {window.outerHeight}</p>
+      <h4>屏幕宽高</h4>
+      <p>screen.outerWidth: {screen.width}</p>
+      <p>screen.outerHeight: {screen.height}</p>
+      <h4>布局视口</h4>
+      <p>window.innerWidth: {window.innerWidth}</p>
+      <p>window.innerHeight: {window.innerHeight}</p>
       <h4>视觉视口</h4>
       <p>
         <b>视口宽度</b>document.documentElement.clientWidth: {document.documentElement.clientWidth}

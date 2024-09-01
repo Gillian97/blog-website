@@ -5,21 +5,17 @@
 .wrapper {
   // background-color: #7be188;
   // border: 10px solid #008026;
-  padding: 10px;
-}
-body {
-  // background-color: #9fd4fd;
-}
-
-section {
-  background-color: #e8ffea;
-}
-.long {
-  height: 1000px;
-  background-color: #9fd4fd;
-}
-b:not(:first-child) {
-  padding: 0px 4px;
-  font-size: 16px;
-  color: #008026;
+  // padding: 10px;
+  section {
+    background-color: #e8ffea;
+  }
+  .long {
+    height: 1000px;
+    background-color: #9fd4fd;
+  }
+  b:not(:first-child) {
+    padding: 0px 4px;
+    font-size: 16px;
+    color: #008026;
+  }
 }

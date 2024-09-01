@@ -1,4 +1,11 @@
-# 移动端适配
+---
+sidebar_position: 1
+# 显示 h2 到 h5 标题
+toc_min_heading_level: 2
+toc_max_heading_level: 4
+---
+
+# 像素
 
 ## 像素
 
@@ -139,21 +146,23 @@ px(pixels)：一英寸的1/96
 也就是3个物理像素表示一个CSS像素，所以iPhone X宽度的CSS像素是375px。此时，CSS单位的1in表示的实际长度是2.79 / 375 * 96in = 0.71424in，此时，CSS的1in并不表示物理长度1in
 
 之所以这种绝对长度不再绝对，就是因为多倍屛的出现，使得像素点的物理尺寸缩小。于是，CSS也修改了这些单位的定义，目前已经得到大多数设备的支持。关于这一点，可以参加[CSS官方文档](https://www.w3.org/TR/css-values-3/#absolute-lengths)
+
 ### 相对长度单位
 相对于预定义的长度或特征，一般是相对于字体或者viewport，在移动端适配中有很重要的作用
-#### 相对于字体
+
+### 相对于字体
 
 - ex (x-height)：等于所用字体的小写字母x的高度
 - ch (character)：等于所用字体的数字0的宽度
 - em：相对于最近父级font-size，所以会有层层嵌套的问题，每一层都是相对于最近父级
-- rem ：相对于html标签的font-size
+- **rem** ：相对于html标签的font-size
 
-#### 相对于viewport
+### 相对于viewport
 
-- vh：viewport高度的1/100
-- vw：viewport宽度的1/100
-- vmin：viewport宽高较小者的1/100
-- vmax：viewport宽高较大者的1/100
+- vh：viewport 高度的1/100
+- vw：viewport 宽度的1/100
+- vmin：viewport 宽高较小者的1/100
+- vmax：viewport 宽高较大者的1/100
 
 ## 总结
 这里花了很大的篇幅去介绍像素，这个看起来简单实际却有点复杂但又必须弄清楚的东西，为后面的移动端适配做基础。
